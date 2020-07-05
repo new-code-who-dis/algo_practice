@@ -24,5 +24,5 @@ def calcIndex(f):
 #function accessing in python, not same as c# clearly brush up on c# though, i miss it
     # there's probably a way to estimate what the value is relative to the index but i don't know how
     # nested for loop come on there has to be another way
-    # how do i return something thats like not an integer type, how does type casting working in python
     # also time this shit, make it speedy
+    # tbh its shitty to change the return type on the fly cause anything else would expect an int so split it out into another function
