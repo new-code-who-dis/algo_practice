@@ -15,8 +15,9 @@ def calcIndex(f):
         currentFib = calcFib(counter)
         if f == currentFib:
             index = counter
-        else:
-            counter += 1
+        elif f < currentFib:
+            index = "Next closest index is " + str(counter) + " which yields " + str(fibbers[counter])
+        counter += 1
     return index
 
 # THOUGHTS:

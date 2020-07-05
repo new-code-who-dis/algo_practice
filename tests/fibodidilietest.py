@@ -8,14 +8,15 @@ class FiboTest(unittest.TestCase):
         self.assertEqual(fib.calcFib(3), 2)
     def testFib10(self):
         self.assertEqual(fib.calcFib(10), 55)
+    
     def testInd1(self):
         self.assertEqual(fib.calcIndex(1), 1)
     def testInd2(self):
         self.assertEqual(fib.calcIndex(2), 3)
     def testIndex55(self):
         self.assertEqual(fib.calcIndex(55), 10)
-    # def testIndex54(self):
-    #     self.assertEqual(fib.calcIndex(54), 1234)
+    def testIndex54(self):
+        self.assertEqual(fib.calcIndex(54), "Next closest index is 10 which yields 55")
 
 
 if __name__ == '__main__':
