@@ -1,5 +1,11 @@
+import gcd
+
 def calc_lcm(a,b):
-    return a
-    # if gcd returns 1 then the last one was a prime number
-    # cause the only divisor of a prime number is itself and 1
-    # but what should i compare the gcd to...
+    # if it didn't complicate things i believe doing it with the lower number would be faster
+    x = a*b
+    return x/gcd.gcdish.gcd_euclidian(a,b)
+
+#ye dumbdumb thinking it meant lowest common divisor, WHICH means we gone have to make that method NEXT
+
+    
+
