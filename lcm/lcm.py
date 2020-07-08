@@ -5,7 +5,17 @@ def calc_lcm(a,b):
     x = a*b
     return x/gcd.gcdish.gcd_euclidian(a,b)
 
-#ye dumbdumb thinking it meant lowest common divisor, WHICH means we gone have to make that method NEXT
+def calc_lcd(a,b):
+    return calc_lcd_func(a,b,1)
+
+def calc_lcd_func(a,b,x):
+    # will refactor gcd method after, just want to get the logic down first
+    if b == 0: 
+        return x
+    else:
+        r = a%b
+        x = a/b - r
+        return calc_lcd_func(b,r,x)
 
     
 
