@@ -1,9 +1,7 @@
 # naive function first
 def calc_gcd(a,b):
     if a < b:
-        x = a
-        a = b
-        b = x
+        a,b = b,a
     return gcd_euclidian(a,b)
 
 def gcd_euclidian(a,b):
@@ -27,3 +25,7 @@ def gcd_basique(a,b):
         d -= 1
     return gcd
 
+# although i get that 3 variable method of swapping is like a staple in the house of code, 
+# i dont know i wanna play with new syntax , i almost think the tuple way is easier for a pleb
+# to understand and the argument here was fun to read so i wanna keep a piece with me
+# https://stackoverflow.com/questions/14836228/is-there-a-standardized-method-to-swap-two-variables-in-python
