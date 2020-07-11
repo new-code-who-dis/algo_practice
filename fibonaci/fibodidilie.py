@@ -20,6 +20,15 @@ def calcIndex(f):
         counter += 1
     return index
 
+def calcLastDigitOfSum(index1, index2):
+    sum = calcFib(index2)
+    for x in range(index1,index2):
+        sum += fibbers[x]
+    return sum%10
+
+
+
+
 # THOUGHTS:
 #function accessing in python, not same as c# clearly brush up on c# though, i miss it
     # there's probably a way to estimate what the value is relative to the index but i don't know how

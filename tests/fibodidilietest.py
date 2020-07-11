@@ -17,6 +17,10 @@ class FiboTest(unittest.TestCase):
         self.assertEqual(fib.calcIndex(55), 10)
     def testIndex54(self):
         self.assertEqual(fib.calcIndex(54), "Next closest index is 10 which yields 55")
+    def testLastDigitBasique(self):
+        self.assertEqual(fib.calcLastDigitOfSum(3,9),6)
+    def testLastDigitAgainBasique(self):
+        self.assertEqual(fib.calcLastDigitOfSum(3,7),1)
 
 
 if __name__ == '__main__':
