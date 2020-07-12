@@ -25,8 +25,9 @@ class FiboTest(unittest.TestCase):
         self.assertEqual(fib.calcLastDigitOfSumPissano(3,9),6)
     def testLastDigitAgainPissano(self):
         self.assertEqual(fib.calcLastDigitOfSumPissano(3,7),1)
+    def testLastDigitPissanoForIndexGreaterThan60(self):
+        self.assertEqual(fib.calcLastDigitOfSumPissano(60,61),1)
 
-# cover when index is geater than 60
 
 
 if __name__ == '__main__':
