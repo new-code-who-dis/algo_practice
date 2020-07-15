@@ -31,7 +31,7 @@ def thinkPension(x):
         biggest = x[biggestidx]
         cx[biggestidx] = 0
         x[biggestidx] = 0
-        salary += biggest * pow(10, (len(x)-idx))
+        salary += biggest * pow(10, (len(x)-idx-1))
     return salary
 
 
