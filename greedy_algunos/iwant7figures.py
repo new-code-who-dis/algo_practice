@@ -50,12 +50,14 @@ def thinkBroke(x):
     return broke
 
 def ageDiscrimination(x):
-    ordered_ages = thinkBroke(x)
+    #ordered_ages = thinkBroke(x)
+    ordered_ages = x
     count = 0 
     # i think i remember the guys at og work saying populating an object just via a reference is shady
     # but there's no need for this dictionary to exist outside of this function, its not applicable
     #yes its better to do a dictionary, yes i should do that next, no its not needed rn okur
-    groups = age_groups(count, ordered_ages, grupos)
+    return age_groups(count, ordered_ages, grupos)
+
 
 grupos = []
 def age_groups(index, ordered_ages, groups):
@@ -64,9 +66,12 @@ def age_groups(index, ordered_ages, groups):
     while (next < len(ordered_ages)) \
             & (ordered_ages[next] < (ordered_ages[index] + 3)):
         build_a_bear.append(ordered_ages[next])
-        next += next
+        next += 1
+    #weird after the first evaluation fails it goes straight to the return, i think this is something about self calling 
+    #functions im not getting
     groups.append(build_a_bear)
-    if next > len(ordered_ages) - 1:
+    
+    if next > (len(ordered_ages) - 1):
         return groups
     else:
         return age_groups(next,ordered_ages,groups) #actually change order cause we should finish the loop on the last line cause #estillo
