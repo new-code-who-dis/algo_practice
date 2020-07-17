@@ -8,3 +8,5 @@ class MuneyTest(unittest.TestCase):
         self.assertEqual(chaching.thinkBroke([4,3,2,1]), [1,2,3,4])
     def testPoBrokeNFab(self):
         self.assertEqual(chaching.thinkBroke([0,0,0,0,1]), [0,0,0,0,1])
+    def testAgeDis(self):
+        self.assertEqual(chaching.ageDiscrimination([5,1,6,10,6,12,13]),[[1],[5,6,6],[10,12],[13]])
