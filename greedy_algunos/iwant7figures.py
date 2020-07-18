@@ -63,6 +63,10 @@ grupos = []
 def age_groups(index, ordered_ages, groups):
     build_a_bear = [ordered_ages[index]]
     next = index + 1
+    if next > (len(ordered_ages) - 1):
+        #traaassssssssssshhhhhhhhhh
+        groups.append(build_a_bear)
+        return groups
     while (next < len(ordered_ages)) \
             & (ordered_ages[next] < (ordered_ages[index] + 3)):
         build_a_bear.append(ordered_ages[next])
@@ -70,11 +74,7 @@ def age_groups(index, ordered_ages, groups):
     #weird after the first evaluation fails it goes straight to the return, i think this is something about self calling 
     #functions im not getting
     groups.append(build_a_bear)
-    
-    if next > (len(ordered_ages) - 1):
-        return groups
-    else:
-        return age_groups(next,ordered_ages,groups) #actually change order cause we should finish the loop on the last line cause #estillo
+    return age_groups(next,ordered_ages,groups) #actually change order cause we should finish the loop on the last line cause #estillo
 
 
 
