@@ -71,6 +71,33 @@ def age_groups(index, ordered_ages, groups):
     groups.append(build_a_bear)
     return age_groups(next,ordered_ages,groups) #actually change order cause we should finish the loop on the last line cause #estillo
 
+def smartSteal(limit, values):
+    values_per_unit = {}
+    for key,item in values.items():
+        val_per_unit = item["value"]/item["weight"] # wow this should just be a class
+        values_per_unit[key] = val_per_unit
+    the_bag = {}
+    extra_space = limit
+    while extra_space > 0:
+        biggest = biggestOfDict(values_per_unit)
+        del values_per_unit[biggest]
+
+        num_of_units = extra_space/values[biggest]["weight"]
+        wieght_of_units = num_of_units * values[biggest]["weight"]
+        
+        extra_space -= wieght_of_units
+        the_bag[biggest] = num_of_units
+
+    return values_per_unit
+
+def biggestOfDict(values):
+    biggest_value = 0
+    biggest_key = None
+    for key,item in values.items():
+        if item > biggest_value:
+            biggest_value = item
+            biggest_key = key
+    return biggest_key
 
 
 
