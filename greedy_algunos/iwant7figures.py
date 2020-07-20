@@ -76,19 +76,20 @@ def smartSteal(limit, values):
     for key,item in values.items():
         val_per_unit = item["value"]/item["weight"] # wow this should just be a class
         values_per_unit[key] = val_per_unit
+    smallest = smallestOfDict(values_per_unit)
     the_bag = {}
     extra_space = limit
-    while extra_space > 0:
+    while extra_space > (values[smallest]["weight"] - 1):
         biggest = biggestOfDict(values_per_unit)
         del values_per_unit[biggest]
-
-        num_of_units = extra_space/values[biggest]["weight"]
+        bigest_weight = values[biggest]["weight"]
+        num_of_units = extra_space//bigest_weight # and i oop, just made it a baby's problem but whateva if I dont create crap what will i have to improve on?!
         wieght_of_units = num_of_units * values[biggest]["weight"]
         
         extra_space -= wieght_of_units
         the_bag[biggest] = num_of_units
 
-    return values_per_unit
+    return the_bag
 
 def biggestOfDict(values):
     biggest_value = 0
@@ -99,6 +100,15 @@ def biggestOfDict(values):
             biggest_key = key
     return biggest_key
 
+def smallestOfDict(values): #fuck its the exact same thing kinda, is there a way to pass in an operation maybe?
+    smallest_key = next(iter(values))
+    smallest_value = values[smallest_key]
+    
+    for key,item in values.items():
+        if item < smallest_value:
+            smallest_value = item
+            smallest_key = key
+    return smallest_key
 
 
 
