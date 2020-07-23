@@ -38,7 +38,6 @@ def calcPissanoMod10():
         fibNumber = calcFib(x)
         pissanoMod10Number = mod10(fibNumber)
         pissanoMod10.append(pissanoMod10Number)
-        #pissanoMod10.append(mod10(calcFib(x)))
     return pissanoMod10
 
 def calcLastDigitOfSumPissano(index1, index2):
