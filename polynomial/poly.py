@@ -14,10 +14,13 @@ def mult_karatsuba_style(p1, p2):
     p1_values_for_formula = calc_formula_values(p1)
     p2_values_for_formula = calc_formula_values(p2)
 
+    #ok you about to lose it all when you go back to your iterative approach little one
+    #but like we've gotten to the point where its at x^1 so not that bad right?
+    concat_for_print = {"p1":p1_values_for_formula, "p2":p2_values_for_formula }
+    return concat_for_print
 
 
     return p1_values_for_formula
-    # do that basic addition thing with the results?
 
 def calc_formula_values(x):
     half = len(x)//2
