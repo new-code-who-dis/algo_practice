@@ -31,7 +31,7 @@ def sub_poly(p1,p2):
 def mult_karatsuba_style(p1, p2):
     #deal with edge case where poly length is odd
     p1_half = len(p1)//2
-    p1_d0 = calc_derivatives(p1,0,p1_half-1)
+    p1_d0 = calc_derivatives(p1,0,p1_half)
     p1_d1 = calc_derivatives(p1,p1_half,(len(p1)-1))
 
     p2_half = len(p2)//2
@@ -52,15 +52,22 @@ def mult_karatsuba_style(p1, p2):
 def calc_derivatives(poly, start, stop):
     #so dont i have to go through the cycle again if we arent at 1 being the higest power?
     n = len(poly)
-    derivatives = [None]*(n//2)
+    half = n//2
+    #shitty mcshit on shit street
+    if start == 0:
+        disposition = half
+    else:
+        disposition = n
+
+    derivatives = [None]*(half)
     for i in range(start,stop):
-        power = calc_derivative_power(n,i)
+        power = calc_derivative_power(disposition,i,half)
         derivatives[power] = poly[i]
     return derivatives
 
-def calc_derivative_power(index,n):
-    displacement = n - index
-    power = n//2 - displacement
+def calc_derivative_power(disposition,index,half):
+    displacement = disposition - index
+    power = half - displacement
     if power < 0:
         return 0
     else:
