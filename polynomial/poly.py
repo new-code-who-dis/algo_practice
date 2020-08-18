@@ -13,6 +13,11 @@ def mult_poly(p1, p2):
 #make it variable length though? or just do adds in main for 2 at a time instead of 4
 def add_poly(p1,p2):
     length = len(p1)#expecting the lengths are the same at this point
+    if length > len(p2):
+        p2.extend([0]*(length-len(p2)))
+    elif len(p2) > length:
+        p1.extend([0]*(len(p2)-length))
+    
     result = [None]*length
     for i in range(length):
         result[i] = p1[i] + p2[i]
@@ -51,32 +56,6 @@ def mult_karatsuba_style(p1, p2):
 
     inner_sub.insert(0,0)
 
-    #make em all the same length - create separate function laters
-    d1e1_mult_length = len(d1e1_mult)
-    d0e0_mult_length = len(d0e0_mult)
-    inner_sub_length = len(inner_sub)
-    #this code is getting desperado also are all of these scenarios even possible though
-    if d1e1_mult_length > d0e0_mult_length:
-        difference = d1e1_mult_length - d0e0_mult_length
-        even_out_list_length(d0e0_mult, difference)#woooow this doesn't seem safe at all! so extend like actually edits the reference not a copy of the reference
-    if d1e1_mult_length > inner_sub_length:
-        difference = d1e1_mult_length - inner_sub_length
-        even_out_list_length(inner_sub, difference)
-    
-    if d0e0_mult_length > d1e1_mult_length:
-        difference = d0e0_mult_length - d1e1_mult_length
-        even_out_list_length(d1e1_mult, difference)
-    if d0e0_mult_length > inner_sub_length:
-        difference = d0e0_mult_length - inner_sub_length
-        even_out_list_length(inner_sub, difference)
-    
-    if inner_sub_length > d0e0_mult_length:
-        difference = inner_sub_length - d0e0_mult_length
-        even_out_list_length(d0e0_mult, difference)
-    if inner_sub_length > d1e1_mult_length:
-        difference = inner_sub_length - d1e1_mult_length
-        even_out_list_length(d1e1_mult, difference)
-    
     almost_over_this_shit = add_poly(d1e1_mult, d0e0_mult)
     very_done = add_poly(almost_over_this_shit, inner_sub)
 
