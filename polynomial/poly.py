@@ -40,14 +40,53 @@ def mult_karatsuba_style(p1, p2):
     all_es_add = add_poly(p2_e0, p2_e1)
     all_add = add_poly(all_ds_add, all_es_add)
 
-    d1e1_mult = mult_poly(p1_d1, p2_e1)
+    d1e1_mult = mult_poly(p1_d1, p2_e1) # need to make this index add 2 - could pop 2 at the start but that seems shady...
+    
     d0e0_mult = mult_poly(p1_d0, p2_e0)
     mults_add = add_poly(d1e1_mult, d0e0_mult)
-    #maybe instead of another function i could just make all the values in a list negative
-    #  and reuse the add method
     inner_sub = sub_poly(all_add, mults_add)
 
-    return d0e0_mult  
+    d1e1_mult.insert(0,0)
+    d1e1_mult.insert(0,0)
+
+    inner_sub.insert(0,0)
+
+    #make em all the same length - create separate function laters
+    d1e1_mult_length = len(d1e1_mult)
+    d0e0_mult_length = len(d0e0_mult)
+    inner_sub_length = len(inner_sub)
+    #this code is getting desperado also are all of these scenarios even possible though
+    if d1e1_mult_length > d0e0_mult_length:
+        difference = d1e1_mult_length - d0e0_mult_length
+        even_out_list_length(d0e0_mult, difference)#woooow this doesn't seem safe at all! so extend like actually edits the reference not a copy of the reference
+    if d1e1_mult_length > inner_sub_length:
+        difference = d1e1_mult_length - inner_sub_length
+        even_out_list_length(inner_sub, difference)
+    
+    if d0e0_mult_length > d1e1_mult_length:
+        difference = d0e0_mult_length - d1e1_mult_length
+        even_out_list_length(d1e1_mult, difference)
+    if d0e0_mult_length > inner_sub_length:
+        difference = d0e0_mult_length - inner_sub_length
+        even_out_list_length(inner_sub, difference)
+    
+    if inner_sub_length > d0e0_mult_length:
+        difference = inner_sub_length - d0e0_mult_length
+        even_out_list_length(d0e0_mult, difference)
+    if inner_sub_length > d1e1_mult_length:
+        difference = inner_sub_length - d1e1_mult_length
+        even_out_list_length(d1e1_mult, difference)
+    
+    almost_over_this_shit = add_poly(d1e1_mult, d0e0_mult)
+    very_done = add_poly(almost_over_this_shit, inner_sub)
+
+    return very_done
+
+
+def even_out_list_length(input, difference):
+    result = [0]*difference
+    l = input.extend(result)
+    return l
 
 def calc_derivatives(poly, start, stop):
     #so dont i have to go through the cycle again if we arent at 1 being the higest power?
