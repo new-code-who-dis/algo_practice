@@ -12,11 +12,12 @@ def mult_poly(p1, p2):
 
 #make it variable length though? or just do adds in main for 2 at a time instead of 4
 def add_poly(p1,p2):
-    length = len(p1)#expecting the lengths are the same at this point
+    length = len(p1)
     if length > len(p2):
         p2.extend([0]*(length-len(p2)))
     elif len(p2) > length:
         p1.extend([0]*(len(p2)-length))
+        length = len(p2)
     
     result = [None]*length
     for i in range(length):
@@ -24,7 +25,14 @@ def add_poly(p1,p2):
     return result
 
 def sub_poly(p1,p2):
-    length = len(p1) #too fucking simliar to add like is it faster to pass in an operation or should i make all the values in one list negative?
+    #too fucking simliar to add like is it faster to pass in an operation or should i make all the values in one list negative?
+    length = len(p1)
+    if length > len(p2):
+        p2.extend([0]*(length-len(p2)))
+    elif len(p2) > length:
+        p1.extend([0]*(len(p2)-length))
+        length = len(p2)
+    
     result = [None]*length
     for i in range(length):
         result[i] = p1[i] - p2[i]
@@ -40,27 +48,28 @@ def mult_karatsuba_style(p1, p2):
     p2_e0 = calc_derivatives(p2,0,p2_half)
     p2_e1 = calc_derivatives(p2,p2_half,len(p2))
 
-    # (d1*e1)x^2 + ( (d1+d0)+(e1+e0) - (d1*e1) - (d0*e0) )x + (d0*e0)
+    # (d1*e1)x^4 + ( (d1+d0)(e1+e0) - (d1*e1) - (d0*e0) )x^2 + (d0*e0)
     all_ds_add = add_poly(p1_d1, p1_d0) 
     all_es_add = add_poly(p2_e0, p2_e1)
-    all_add = add_poly(all_ds_add, all_es_add)
+    adds_mult = mult_poly(all_ds_add, all_es_add)
 
     d1e1_mult = mult_poly(p1_d1, p2_e1) # need to make this index add 2 - could pop 2 at the start but that seems shady...
     
     d0e0_mult = mult_poly(p1_d0, p2_e0)
     mults_add = add_poly(d1e1_mult, d0e0_mult)
-    inner_sub = sub_poly(all_add, mults_add)
+    inner_sub = sub_poly(adds_mult, mults_add)
 
-    d1e1_mult.insert(0,0)
-    d1e1_mult.insert(0,0)
-
-    inner_sub.insert(0,0)
+    increase_power(4,d1e1_mult)#why though?
+    increase_power(2,inner_sub)#same like why isn't it just 1 x?
 
     almost_over_this_shit = add_poly(d1e1_mult, d0e0_mult)
     very_done = add_poly(almost_over_this_shit, inner_sub)
 
     return very_done
 
+def increase_power(indices, poly):
+    for i in range(indices):
+        poly.insert(0,0)
 
 def even_out_list_length(input, difference):
     result = [0]*difference
