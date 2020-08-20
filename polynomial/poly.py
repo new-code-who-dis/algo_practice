@@ -12,13 +12,7 @@ def mult_poly(p1, p2):
 
 #make it variable length though? or just do adds in main for 2 at a time instead of 4
 def add_poly(p1,p2):
-    length = len(p1)
-    if length > len(p2):
-        p2.extend([0]*(length-len(p2)))
-    elif len(p2) > length:
-        p1.extend([0]*(len(p2)-length))
-        length = len(p2)
-    
+    length = make_same_length(p1,p2)
     result = [None]*length
     for i in range(length):
         result[i] = p1[i] + p2[i]
@@ -26,18 +20,24 @@ def add_poly(p1,p2):
 
 def sub_poly(p1,p2):
     #too fucking simliar to add like is it faster to pass in an operation or should i make all the values in one list negative?
+    length = make_same_length(p1,p2)
+    result = [None]*length
+    for i in range(length):
+        result[i] = p1[i] - p2[i]
+    return result
+
+def make_same_length(p1,p2):
+    #ok so ever since the start i was warned against methods that take and change a reference
+    #and c# would tell me that right with the ref thing
+    #so i feel shady doing 2 things here but like its so ezy
     length = len(p1)
     if length > len(p2):
         p2.extend([0]*(length-len(p2)))
     elif len(p2) > length:
         p1.extend([0]*(len(p2)-length))
         length = len(p2)
-    
-    result = [None]*length
-    for i in range(length):
-        result[i] = p1[i] - p2[i]
-    return result
- 
+    return length
+
 def mult_karatsuba_style(p1, p2):
     #deal with edge case where poly length is odd
     p1_half = len(p1)//2
