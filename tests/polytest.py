@@ -10,6 +10,8 @@ class PolyTest(unittest.TestCase):
         self.assertEqual(poly.mult_poly([1,2,3,4],[4,3,2,1]),[4, 11, 20, 30, 20, 11, 4])
     def testPolyKaratsuba(self):
         self.assertEqual(poly.mult_karatsuba_style([1,2,3,4],[4,3,2,1]),[4, 11, 20, 30, 20, 11, 4])
+    def testPolyKaraButAnotherExample(self):
+        self.assertEqual(poly.mult_karatsuba_style([2,3,4],[3,4,5]),[6, 17, 34, 31, 20])#oh my she's failing
 
 if __name__ == '__main__':
     unittest.main()
