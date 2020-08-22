@@ -39,23 +39,17 @@ def make_same_length(p1,p2):
     return length
 
 def mult_karatsuba_style(p1, p2):
-    #deal with edge case where poly length is odd
-    p1_half = len(p1)//2
-    p1_d0 = calc_derivatives(p1,0,p1_half)
-    p1_d1 = calc_derivatives(p1,p1_half,len(p1))
-
-    p2_half = len(p2)//2
-    p2_e0 = calc_derivatives(p2,0,p2_half)
-    p2_e1 = calc_derivatives(p2,p2_half,len(p2))
+    p1_derivatives = calc_derivative_parts(p1)
+    p2_derviatives = calc_derivative_parts(p2)
 
     # (d1*e1)x^4 + ( (d1+d0)(e1+e0) - (d1*e1) - (d0*e0) )x^2 + (d0*e0)
-    all_ds_add = add_poly(p1_d1, p1_d0) 
-    all_es_add = add_poly(p2_e0, p2_e1)
+    all_ds_add = add_poly(p1_derivatives[1], p1_derivatives[0]) 
+    all_es_add = add_poly(p2_derviatives[1], p2_derviatives[0])
     adds_mult = mult_poly(all_ds_add, all_es_add)
 
-    d1e1_mult = mult_poly(p1_d1, p2_e1) # need to make this index add 2 - could pop 2 at the start but that seems shady...
+    d1e1_mult = mult_poly(p1_derivatives[1], p2_derviatives[1])
     
-    d0e0_mult = mult_poly(p1_d0, p2_e0)
+    d0e0_mult = mult_poly(p1_derivatives[0], p2_derviatives[0])
     mults_add = add_poly(d1e1_mult, d0e0_mult)
     inner_sub = sub_poly(adds_mult, mults_add)
 
@@ -66,6 +60,15 @@ def mult_karatsuba_style(p1, p2):
     very_done = add_poly(almost_over_this_shit, inner_sub)
 
     return very_done
+
+def calc_derivative_parts(p):
+    #deal with edge case where poly length is odd
+    length = len(p)
+    half = length//2
+    d0 = calc_derivatives(p,0,half)
+    d1 = calc_derivatives(p,half,length)
+    parts = [d0,d1]
+    return parts
 
 def increase_power(indices, poly):
     for i in range(indices):
