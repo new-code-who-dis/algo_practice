@@ -62,7 +62,8 @@ def mult_karatsuba_style(p1, p2):
     return very_done
 
 def calc_derivative_parts(p):
-    #deal with edge case where poly length is odd
+    if len(p)%2 > 0:
+        p.append(0)
     length = len(p)
     half = length//2
     d0 = calc_derivatives(p,0,half)
