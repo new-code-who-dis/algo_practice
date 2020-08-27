@@ -27,9 +27,6 @@ def sub_poly(p1,p2):
     return result
 
 def make_same_length(p1,p2):
-    #ok so ever since the start i was warned against methods that take and change a reference
-    #and c# would tell me that right with the ref thing
-    #so i feel shady doing 2 things here but like its so ezy
     length = len(p1)
     if length > len(p2):
         p2.extend([0]*(length-len(p2)))
