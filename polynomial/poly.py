@@ -28,11 +28,12 @@ def sub_poly(p1,p2):
 
 def make_same_length(p1,p2):
     length = len(p1)
-    if length > len(p2):
-        p2.extend([0]*(length-len(p2)))
-    elif len(p2) > length:
-        p1.extend([0]*(len(p2)-length))
-        length = len(p2)
+    length_compare = len(p2)
+    if length > length_compare:
+        p2.extend([0]*(length-length_compare))
+    elif length_compare > length:
+        p1.extend([0]*(length_compare-length))
+        length = length_compare
     return length
 
 def mult_karatsuba_style(p1, p2):
